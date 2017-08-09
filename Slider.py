@@ -1,6 +1,9 @@
 import numpy as np
 import random
 
+import jenny
+import ready
+
 # matrix block visual labels
 block = '+++'
 empty = '---'
@@ -188,7 +191,7 @@ def solver(state,size,complexity):
 	print breath[1][-1][1]
 
 def setter(): # make a preset matrix / moves = 18
-	mat = 8*[8*[block*5]]
+	mat = 8*[8*['X'*5]]
 	mat = np.matrix(mat)
 	mat[:,:] = empty
 	
@@ -220,10 +223,12 @@ def setter(): # make a preset matrix / moves = 18
 
 def main(): # main script body
 	
+	ready.reader('puzzle1.puz')
+	ready.writer()
+	
 	set = setter()
 	# solver(set,0,0)
-	solver(0,8,0)
-	
+	# solver(0,8,0)
 	
 	return 0
 
