@@ -2,9 +2,6 @@ import phil
 import man
 import jen
 
-
-print '----------------------------------------------------------------'
-
 def solver(name,size,complexity,moves,start,solution): # solve and return the optimum move list
 	walked = man.walker(start)
 	print 'walked in %d moves' % walked[0]
@@ -23,21 +20,23 @@ def solver(name,size,complexity,moves,start,solution): # solve and return the op
 
 def main(): # main script body
 	
+	print '----------------------------------------------------------------'
+	
 	puz = list(phil.reader('blank.puz'))
-	print puz[4]
 	puz = solver(*puz)
+	print puz[4]
 	print puz[5][-1]
 	phil.writer(*puz)
 	
 	print '----------------------------------------------------------------'
 	
-	new = ['test.puz',20,0,0,[],[]]
-	new[4] = jen.genner(new[1],new[2])
-	print new[4]
-	new[4] = man.scrambler(new[4])
-	print new[4]
-	new = solver(*new)
-	phil.writer(*new)
+	test = ['test.puz',8,0,0,[],[]]
+	test[4] = jen.genner(test[1],test[2])
+	test[4] = man.scrambler(test[4])
+	print test[4]
+	test = solver(*test)
+	print test[5][-1]
+	phil.writer(*test)
 	
 	return 0
 
