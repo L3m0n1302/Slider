@@ -1,5 +1,4 @@
 # manipulate a given game state in various ways
-
 import random
 
 block = '+++'
@@ -69,14 +68,23 @@ def checker(state): # check if the current state is solved
 	else:
 		return 0
 
-def walker(start): # random walk to see if a solution is possible
-	road = [start]
+def scrambler(state):
+	counter = 0
 	while True:
+		moves = mover(state)
+		state = random.choice(moves)
+		counter += 1
+		if counter == 1000:
+			return state
+
+def walker(state): # random walk to see if a solution is possible
+	road = [state]
+	while True:
+		if checker(state) == 1:
+			return len(road)-1,road
 		fork = mover(road[-1])
 		state = random.choice(fork)
 		road.append(state)
-		if checker(state) == 1:
-			return len(road)-1,road
 
 def breather(start): # breadth first search / fInd all possible moves until solved
 	tree = [[[0],start]] # decision tree of moves
