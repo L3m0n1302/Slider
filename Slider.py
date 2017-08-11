@@ -31,7 +31,7 @@ def main(): # main script body
 	
 	print '----------------------------------------------------------------'
 	
-	new = ['test.puz',9,0,0,[],[]]
+	new = ['test.puz',20,0,0,[],[]]
 	new[4] = jen.genner(new[1],new[2])
 	print new[4]
 	new[4] = man.scrambler(new[4])
