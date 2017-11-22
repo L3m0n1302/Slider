@@ -1,10 +1,12 @@
-# block puzzle solver and generator
+"""block puzzle solver and generator"""
 
 import phil
 import man
 import jen
 
-def solver(name, size, complexity, moves, start, solution): # solve and return the optimum move list
+def solver(name, size, complexity, moves, start, solution):
+    """solve and return the optimum move list"""
+
     walked = man.walker(start)
     print('walked in {0} moves'.format(walked[0]))
     breath = man.breather(start)
@@ -20,7 +22,8 @@ def solver(name, size, complexity, moves, start, solution): # solve and return t
     moves = len(solution)
     return name, size, complexity, moves, start, solution
 
-def main(): # main script body
+def main():
+    """main script body"""
 
     print('----------------------------------------------------------------')
 

@@ -1,4 +1,4 @@
-# handles puzzle generation
+"""handles puzzle generation"""
 
 import random
 import itertools
@@ -9,8 +9,8 @@ empty = '---'
 aim = '***'
 finish = '==='
 
-def genner(N, comp): # generates an NxN matrix of complexity comp
-
+def genner(N, comp):
+    """generate an NxN matrix of complexity comp"""
     # create the starting empty matrix
     start = N*[N*['X'*5]]
     start = np.matrix(start)

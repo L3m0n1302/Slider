@@ -1,4 +1,4 @@
-# manipulate a given game state in various ways
+"""manipulate a given game state in various ways"""
 
 import random
 
@@ -7,7 +7,8 @@ empty = '---'
 aim = '***'
 finish = '==='
 
-def director(state, posy, posx, direction): # figure if a move is possible from a spot in each direction
+def director(state, posy, posx, direction):
+    """figure if a move is possible from a spot in each direction"""
     i = 0
     if direction == 'up':
         while state[posy+i, posx] == empty:
@@ -31,7 +32,8 @@ def director(state, posy, posx, direction): # figure if a move is possible from 
             return 'True', i, state[posy, posx-i]
     return 0, 0, 0
 
-def mover(state): # given a game state find all possible movements
+def mover(state):
+    """given a game state find all possible movements"""
     movelist = [] # list of possible moves
     moveset = [] # list of states resulting from possible moves
     for y in range(1, len(state)-1):
@@ -62,12 +64,14 @@ def mover(state): # given a game state find all possible movements
         moveset.append(tempstate)
     return moveset
 
-def checker(state): # check if the current state is solved
+def checker(state):
+    """check if the current state is solved"""
     N = len(state)
     if state[N//2-1, N-2] == aim:
         return 1
 
 def scrambler(state):
+    """reverse breadth first search to scramble a puzzle"""
     counter = 0
     while True:
         moves = mover(state)
@@ -76,7 +80,8 @@ def scrambler(state):
         if counter == 1000:
             return state
 
-def walker(state): # random walk to see if a solution is possible
+def walker(state):
+    """random walk to see if a solution is possible"""
     road = [state]
     while True:
         if checker(state) == 1:
@@ -85,7 +90,8 @@ def walker(state): # random walk to see if a solution is possible
         state = random.choice(fork)
         road.append(state)
 
-def breather(start): # breadth first search / fInd all possible moves until solved
+def breather(start):
+    """breadth first search / fInd all possible moves until solved"""
     tree = [[[0], start]] # decision tree of moves
     queue = [[[0], start]] # queue of states to explore
     seen = [start] # seen states
