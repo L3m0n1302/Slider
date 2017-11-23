@@ -2,6 +2,7 @@
 
 import random
 import itertools
+import math
 import numpy as np
 
 block = '+++'
@@ -11,39 +12,33 @@ finish = '==='
 
 def genner(N, comp):
     """generate an NxN matrix of complexity comp"""
-    # create the starting empty matrix
-    start = N*[N*['X'*5]]
-    start = np.matrix(start)
+    # create the starting basic matrix
+    #start = np.empty((N, N), dtype='U3')
+    start = np.chararray((N, N), itemsize=3, unicode=True)
     start[:, :] = empty
-
-    # create boundary
     start[:, 0] = block
     start[:, N-1] = block
     start[0, :] = block
     start[N-1, :] = block
-
-    # create the finish point and goal piece
-    fin = round(float(N)/2)-1 # finish position on that edge
+    fin = N//2-1 # finish position on that edge
     start[fin, N-1] = finish # finish point
     start[fin, N-3:N-1] = aim # goal piece
-
     # create extra blocks
     if comp >= 1:
-        for _ in itertools.repeat(None, int(round(N/4))):
+        for _ in itertools.repeat(None, N//4):
             bx = random.randint(1, N-2)
             by = random.randint(1, N-2)
             if start[by, bx] == empty:
                 if by == fin:
                     break
                 start[by, bx] = block
-
     # create the rest of the pieces
-    counter = int(round(N*0.4))*[0]
+    counter = math.ceil(N*0.4)*[0]
     xy = itertools.cycle(['x', 'y'])
     while np.count_nonzero(start == empty) >= (((N-1)**2)*0.25) and counter[0] <= 100:
         legal = False
         while not legal:
-            size = random.randint(2, int(round(N*0.4)))
+            size = random.randint(2, math.ceil(N*0.4))
             bx = random.randint(1, N-2)
             by = random.randint(1, N-2)
             if start[by, bx] != empty:

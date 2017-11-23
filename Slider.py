@@ -6,7 +6,6 @@ import jen
 
 def solver(name, size, complexity, moves, start, solution):
     """solve and return the optimum move list"""
-
     walked = man.walker(start)
     print('walked in {0} moves'.format(walked[0]))
     breath = man.breather(start)
@@ -24,25 +23,22 @@ def solver(name, size, complexity, moves, start, solution):
 
 def main():
     """main script body"""
-
     print('----------------------------------------------------------------')
-
-    puz = list(phil.reader('blank.puz'))
-    puz = solver(*puz)
-    print(puz[4])
-    print(puz[5][-1])
-    phil.writer(*puz)
-
+    test1 = list(phil.reader('blank.puz'))
+    print(test1[4])
+    test1 = solver(*test1)
+    print(test1[5][-1])
+    phil.writer(*test1)
     print('----------------------------------------------------------------')
-
-    test = ['test.puz', 8, 0, 0, [], []]
-    test[4] = jen.genner(test[1], test[2])
-    test[4] = man.scrambler(test[4])
-    print(test[4])
-    test = solver(*test)
-    print(test[5][-1])
-    phil.writer(*test)
-
+    test2 = ['test.puz', 8, 0, 0, [], []]
+    test2[4] = jen.genner(test2[1], test2[2])
+    print(test2[4])
+    test2[4] = man.scrambler(test2[4])
+    print(test2[4])
+    test2 = solver(*test2)
+    print(test2[5][-1])
+    phil.writer(*test2)
+    print('----------------------------------------------------------------')
     return 0
 
 if __name__ == "__main__":

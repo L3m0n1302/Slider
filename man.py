@@ -14,23 +14,23 @@ def director(state, posy, posx, direction):
         while state[posy+i, posx] == empty:
             i += 1
         if 'y' in state[posy+i, posx]:
-            return 'True', i, state[posy+i, posx]
+            return True, i, state[posy+i, posx]
     elif direction == 'down':
         while state[posy-i, posx] == empty:
             i += 1
         if 'y' in state[posy-i, posx]:
-            return 'True', i, state[posy-i, posx]
+            return True, i, state[posy-i, posx]
     elif direction == 'left':
         while state[posy, posx+i] == empty:
             i += 1
         if ('x' in state[posy, posx+i]) or (state[posy, posx+i] == aim):
-            return 'True', i, state[posy, posx+i]
+            return True, i, state[posy, posx+i]
     elif direction == 'right':
         while state[posy, posx-i] == empty:
             i += 1
         if ('x' in state[posy, posx-i]) or (state[posy, posx-i] == aim):
-            return 'True', i, state[posy, posx-i]
-    return 0, 0, 0
+            return True, i, state[posy, posx-i]
+    return False, 0, 0
 
 def mover(state):
     """given a game state find all possible movements"""
@@ -41,14 +41,15 @@ def mover(state):
             if state[y, x] == empty:
                 for direction in ['up', 'down', 'left', 'right']:
                     tf, i, value = director(state, y, x, direction)
-                    if tf == 'True':
+                    if tf:
                         movelist.append([y, x, i, direction, value])
     for move in movelist:
         tempstate = state.copy()
-        length = move[4][0]
+        length = (move[4][0])
         if length in aim:
             length = 2
-        length = int(length)
+        else:
+            length = int(length)
         if move[3] == 'up':
             tempstate[move[0]+move[2]:move[0]+move[2]+length, move[1]] = empty
             tempstate[move[0]:move[0]+length, move[1]] = move[4]
@@ -78,6 +79,7 @@ def scrambler(state):
         state = random.choice(moves)
         counter += 1
         if counter == 1000:
+            print('scrambled')
             return state
 
 def walker(state):
