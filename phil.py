@@ -14,12 +14,12 @@ def reader(name):
     moves = int(lines[2])
     start = np.chararray((size, size), itemsize=3, unicode=True)
     for i in range(0, size):
-        start[i,:] = lines[4+i].split()
+        start[i, :] = lines[4+i].split()
     solution = []
     for x in range(0, moves):
         move = np.chararray((size, size), itemsize=3, unicode=True)
         for i in range(0, size):
-            move[i,:] = lines[4+i+(size+1)*(x+1)].split()
+            move[i, :] = lines[4+i+(size+1)*(x+1)].split()
         solution.append(move)
     file.close()
     return name, size, complexity, moves, start, solution

@@ -2,7 +2,6 @@
 
 import phil
 import man
-import jen
 
 def solver(name, size, complexity, moves, start, solution):
     """solve and return the optimum move list"""
@@ -31,7 +30,7 @@ def main():
     phil.writer(*test1)
     print('----------------------------------------------------------------')
     test2 = ['test.puz', 8, 0, 0, [], []]
-    test2[4] = jen.genner(test2[1], test2[2])
+    test2[4] = man.genner(test2[1], test2[2])
     print(test2[4])
     test2[4] = man.scrambler(test2[4])
     print(test2[4])
